@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Trophy, Star, TrendingUp, BookOpen } from 'lucide-react';
+import {setUserContext} from "@/lib/supabase";
 
 export function Web3Dashboard() {
     const { address, isConnected } = useAccount();
@@ -23,6 +24,7 @@ export function Web3Dashboard() {
             if (address && isConnected) {
                 setLoading(true);
                 try {
+                    await setUserContext(address)
                     const userData = await Web3Auth.getOrCreateUser(address, ensName || undefined);
                     setUser(userData);
                 } catch (error) {

@@ -10,7 +10,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const setUserContext = async (walletAddress: string) => {
     await supabase.rpc('set_config', {
         config_name: 'app.current_user_wallet',
-        config_value: walletAddress.toLowerCase()
+        config_value: walletAddress
     });
 };
 

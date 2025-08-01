@@ -51,23 +51,6 @@ export default function LandingPage() {
                         risk-free paper trading, and earn rewards for your progress.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                        <ConnectButton.Custom>
-                            {({ account, chain, openConnectModal, mounted }) => {
-                                return (
-                                    <Button
-                                        size="lg"
-                                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg"
-                                        onClick={openConnectModal}
-                                    >
-                                        <Wallet className="mr-2 h-5 w-5" />
-                                        Connect Wallet to Start
-                                    </Button>
-                                )
-                            }}
-                        </ConnectButton.Custom>
-                    </div>
-
                     {/* Stats */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
                         <div className="text-center">
