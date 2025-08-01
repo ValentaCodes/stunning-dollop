@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useAuth } from '@/lib/auth'
-import { supabase, Course } from '@/lib/supabase'
+import { Web3Auth } from '@/lib/auth'
+import {supabase, Database, setUserContext} from '@/lib/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,8 +11,8 @@ import Link from 'next/link'
 import { BookOpen, Clock, Trophy, Star } from 'lucide-react'
 
 export default function CoursesPage() {
-    const { profile } = useAuth()
-    const [courses, setCourses] = useState<Course[]>([])
+    // const {walletAddress } = Web3Auth();
+    const [courses, setCourses] = useState<Database[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -21,6 +21,7 @@ export default function CoursesPage() {
 
     const fetchCourses = async () => {
         try {
+            // await setUserContext(walletAddress)
             const { data, error } = await supabase
                 .from('courses')
                 .select('*')
