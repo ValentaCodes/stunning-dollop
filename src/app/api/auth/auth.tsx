@@ -1,18 +1,18 @@
 // lib/auth.tsx
-import {setUserContext, supabase} from './supabase';
+import handler from './supabase';
 import { Web3User } from '@/types/user';
 
 export class Web3Auth {
     static async getOrCreateUser(walletAddress: string, ensName?: string): Promise<Web3User> {
+        // await setUserContext(walletAddress)
         // Check if user exists
-        await setUserContext(walletAddress)
-        const { data: existingUser, error } = await supabase.schema('testschema')
+        const { data: existingUser, error } = await handler(walletAddress, )
             .from('users')
             .select('*')
             .eq('wallet_address', walletAddress).single()
         if (existingUser && !error) {
             // Update last login
-            await supabase.schema('testschema')
+            await handler
                 .from('users')
                 .update({ last_login: new Date().toISOString() }).eq('wallet_address', walletAddress)
 
@@ -29,9 +29,9 @@ export class Web3Auth {
             current_streak: 0,
             achievements: [],
         };
+        // await setUserContext(walletAddress)
 
-        const { data: createdUser, error: createError } = await supabase.schema('testschema')
-            .from('users')
+        const { data: createdUser, error: createError } = await handler.from('users')
             .insert(newUser)
             .select()
             .single();
@@ -45,8 +45,7 @@ export class Web3Auth {
 
     static async updateUserProgress(walletAddress: string, xpGain: number) {
         await setUserContext(walletAddress)
-        const { data: user } = await supabase.schema('testschema')
-            .from('users')
+        const { data: user } = await handler.from('users')
             .select('total_xp, level')
             .eq('wallet_address', walletAddress.toLowerCase())
             .single();
@@ -55,7 +54,7 @@ export class Web3Auth {
             const newXp = user.total_xp + xpGain;
             const newLevel = Math.floor(newXp / 1000) + 1; // 1000 XP per level
 
-            await supabase.schema('testschema')
+            await handler
                 .from('users')
                 .update({
                     total_xp: newXp,

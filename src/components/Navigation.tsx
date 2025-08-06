@@ -1,6 +1,6 @@
 // components/Navigation.tsx
 'use client'
-import { useAuth } from '@/lib/auth'
+import { useAuth } from '@/app/api/auth/auth'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {

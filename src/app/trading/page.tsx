@@ -1,6 +1,6 @@
 // app/trading/page.tsx
 'use client'
-import { useAuth } from '@/lib/auth'
+import { useAuth } from '@/app/api/auth/auth'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import TradingSimulator from '@/components/TradingSimulator'

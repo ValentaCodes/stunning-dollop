@@ -1,5 +1,5 @@
 'use client'
-import { useAuth } from '@/lib/auth'
+import { useAuth } from '@/app/api/auth/auth'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'

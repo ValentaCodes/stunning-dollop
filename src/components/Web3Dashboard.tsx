@@ -3,14 +3,14 @@
 import { useAccount, useEnsName, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEffect, useState } from 'react';
-import { Web3Auth } from '@/lib/auth';
+import { Web3Auth } from '@/app/api/auth/auth';
 import { Web3User } from '@/types/user';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Trophy, Star, TrendingUp, BookOpen } from 'lucide-react';
-import {setUserContext} from "@/lib/supabase";
+import {setUserContext} from "@/app/api/auth/supabase";
 
 export function Web3Dashboard() {
     const { address, isConnected } = useAccount();
@@ -24,7 +24,6 @@ export function Web3Dashboard() {
             if (address && isConnected) {
                 setLoading(true);
                 try {
-                    await setUserContext(address)
                     const userData = await Web3Auth.getOrCreateUser(address, ensName || undefined);
                     setUser(userData);
                 } catch (error) {

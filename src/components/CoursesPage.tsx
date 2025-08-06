@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Web3Auth } from '@/lib/auth'
-import {supabase, Database, setUserContext} from '@/lib/supabase'
+import { Web3Auth } from '@/app/api/auth/auth'
+import {supabase, Database, setUserContext} from '@/app/api/auth/supabase'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,9 +9,11 @@ import { Progress } from '@/components/ui/progress'
 import Navigation from './Navigation'
 import Link from 'next/link'
 import { BookOpen, Clock, Trophy, Star } from 'lucide-react'
+import {useAccount} from "wagmi";
 
 export default function CoursesPage() {
-    // const {walletAddress } = Web3Auth();
+    // const {address} = useAccount()
+    // const { walletAddress } = Web3Auth.getOrCreateUser(address);
     const [courses, setCourses] = useState<Database[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -64,6 +66,8 @@ export default function CoursesPage() {
             </div>
         )
     }
+
+    { console.log(courses, 'courses')}
 
     return (
         <div className="min-h-screen bg-gray-50">
